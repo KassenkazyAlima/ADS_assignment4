@@ -1,61 +1,46 @@
-
 package org.example;
 
-import java.util.Stack;
+import java.util.*;
 
+public class DepthFirstSearch<V> extends Search<V> {
+//    private Map<V, V> edgeTo = new HashMap<>();
+    private Set<V> visited = new HashSet<>();
+    private final WeightedGraph<V> graph;
 
-
-public class DepthFirstSearch<Vertex> extends Search<Vertex> {
-    public DepthFirstSearch(MyGraph<Vertex> graph, Vertex source) {
-        super(source);
-
-        dfs(graph, source);
+    public DepthFirstSearch(WeightedGraph<V> graph, V startVertex) {
+        super(startVertex);
+        this.graph = graph;
+        dfs(startVertex);
     }
 
-    private void dfs(MyGraph<Vertex> graph, Vertex current) {
-        marked.add(current);
-
-        for (Vertex v : graph.adjacencyList(current)) {
-            if (!marked.contains(v)) {
-                edgeTo.put(v, current);
-                dfs(graph, v);
+    private void dfs(V vertex) {
+        visited.add(vertex);
+        for (Edge<V> e : graph.getEdges(vertex)) {
+            V neighbor = e.getDest();
+            if (!visited.contains(neighbor)) {
+                edgeTo.put(neighbor, vertex);
+                dfs(neighbor);
             }
         }
     }
+
+    @Override
+    public List<V> pathTo(V destination) {
+        List<Vertex> path = new ArrayList<>();
+
+        if (!visited.contains(destination)) {
+            return null;
+        }
+        for (V x = destination; x != null; x = edgeTo.get(x)) {
+            path.addFirst(x);
+        }
+        return path;
+    }
+
+    @Override
+    public void search(V startVertex) {
+        if (!visited.contains(startVertex)) {
+            dfs(startVertex);
+        }
+    }
 }
-
-
-
-//
-//public class DepthFirstSearch<V> extends Search<V> {
-//    public DepthFirstSearch(MyGraph<V> graph, V source) {
-//        super(new Vertex<>(source));
-//        dfs(graph, new Vertex<>(source));
-//    }
-//
-//    private void dfs(MyGraph<V> graph, Vertex<V> current) {
-//        marked.add(current);
-//
-//        Stack<Vertex<V>> stack = new Stack<>();
-//        stack.push(current);
-//
-//        while (!stack.isEmpty()) {
-//            Vertex<V> v = stack.peek();
-//            Vertex<V> next = null;
-//            for (Vertex<V> neighbor : graph.adjacencyList(v)) {
-//                if (!marked.contains(neighbor)) {
-//                    next = neighbor;
-//                    break;
-//                }
-//            }
-//
-//            if (next != null) {
-//                marked.add(next);
-//                edgeTo.put(next, v);
-//                stack.push(next);
-//            } else {
-//                stack.pop();
-//            }
-//        }
-//    }
-//}

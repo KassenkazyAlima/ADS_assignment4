@@ -4,7 +4,7 @@ import java.util.*;
 
 public class Vertex<V> {
     private V data;
-    private Map<Vertex<V>, Double> adjacentVertices;
+    private Map<Vertex<V>, Double> adjacentVertices; //this is with weights
 
     public Vertex(V data) {
         this.data = data;
@@ -22,9 +22,4 @@ public class Vertex<V> {
     public Map<Vertex<V>, Double> getAdjacentVertices() {
         return adjacentVertices;
     }
-
-//    @Override
-//    public String toString() {
-//        return data.toString();
-//    }
 }

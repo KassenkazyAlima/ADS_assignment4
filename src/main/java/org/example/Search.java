@@ -2,30 +2,32 @@ package org.example;
 
 import java.util.*;
 
-public abstract class Search<V> {
-    protected Set<Vertex<V>> marked;
-    protected Map<Vertex<V>, Vertex<V>> edgeTo;
-    protected final Vertex<V> source;
+public abstract class Search<Vertex> {
+    protected Set<Vertex> marked;
+    protected Map<Vertex, Vertex> edgeTo;
+    protected final Vertex source;
 
-    public Search(Vertex<V> source) {
+    public Search(Vertex source) {
         this.source = source;
         marked = new HashSet<>();
         edgeTo = new HashMap<>();
     }
 
-    public boolean hasPathTo(Vertex<V> v) {
+    // Abstract methods that subclasses must implement.
+    abstract void search(Vertex startVertex);
+
+    public boolean hasPathTo(Vertex v) {
         return marked.contains(v);
     }
 
-    public Iterable<V> pathTo(Vertex<V> v) {
+    public List<Vertex> pathTo(Vertex v) {
         if (!hasPathTo(v)) return null;
 
-        LinkedList<V> ls = new LinkedList<>();
-        for (Vertex<V> i = v; i != source; i = edgeTo.get(i)) {
-            ls.push(i.getData());
+        LinkedList<Vertex> ls = new LinkedList<>();
+        for (Vertex i = v; i != source; i = edgeTo.get(i)) {
+            ls.push(i); // inverted adding
         }
-
-        ls.push(source.getData());
+        ls.push(source);
 
         return ls;
     }

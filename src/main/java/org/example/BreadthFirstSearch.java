@@ -1,28 +1,47 @@
 package org.example;
 
-import java.util.LinkedList;
-import java.util.Queue;
+import java.util.*;
 
-public class BreadthFirstSearch<V> extends Search<V> {
-    public BreadthFirstSearch(MyGraph<V> graph, V source) {
-        super(new Vertex<>(source));
-        bfs(graph, new Vertex<>(source));
+public class BreadthFirstSearch<Vertex> extends Search<Vertex> {
+    private Map<Vertex, Vertex> edgeTo = new HashMap<>();
+    private Set<Vertex> marked = new HashSet<>();
+    private final WeightedGraph<Vertex> graph;
+
+    public BreadthFirstSearch(WeightedGraph<Vertex> graph, Vertex startVertex) {
+        super(startVertex); // Pass startVertex to the superclass constructor
+        this.graph = graph;
+        search(startVertex);
     }
 
-    private void bfs(MyGraph<V> graph, Vertex<V> current) {
-        marked.add(current);
-        Queue<Vertex<V>> queue = new LinkedList<>();
-        queue.add(current);
+    @Override
+    public void search(Vertex startVertex) {
+        Queue<Vertex> queue = new LinkedList<>();
+        marked.add(startVertex);
+        queue.offer(startVertex);
 
         while (!queue.isEmpty()) {
-            Vertex<V> v = queue.remove();
-            for (Vertex<V> neighbor : graph.adjacencyList(v)) {
+            Vertex current = queue.poll();
+            for (Edge<Vertex> e : graph.getEdges(current)) {
+                Vertex neighbor = e.getDest();
                 if (!marked.contains(neighbor)) {
+                    edgeTo.put(neighbor, current);
                     marked.add(neighbor);
-                    edgeTo.put(neighbor, v);
-                    queue.add(neighbor);
+                    queue.offer(neighbor);
                 }
             }
         }
+    }
+
+    @Override
+    public List<Vertex> pathTo(Vertex endVertex) {
+        List<Vertex> path = new ArrayList<>();
+
+        if (!marked.contains(endVertex)) return null;
+
+        for (Vertex x = endVertex; x != null; x = edgeTo.get(x)) {
+            path.add(x);
+        }
+        Collections.reverse(path);
+        return path;
     }
 }
