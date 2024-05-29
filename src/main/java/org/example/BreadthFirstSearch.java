@@ -2,9 +2,10 @@ package org.example;
 
 import java.util.*;
 
+
 public class BreadthFirstSearch<Vertex> extends Search<Vertex> {
-    private Map<Vertex, Vertex> edgeTo = new HashMap<>();
-    private Set<Vertex> marked = new HashSet<>();
+    private final Map<Vertex, Vertex> edgeTo = new HashMap<>();
+    private final Set<Vertex> marked = new HashSet<>();
     private final WeightedGraph<Vertex> graph;
 
     public BreadthFirstSearch(WeightedGraph<Vertex> graph, Vertex startVertex) {
