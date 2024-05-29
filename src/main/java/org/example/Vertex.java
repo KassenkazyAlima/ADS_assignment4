@@ -11,9 +11,9 @@ public class Vertex<V> {
         this.adjacentVertices = new HashMap<>();
     }
 
-//    public V getData() {
-//        return data;
-//    }
+    public V getData() {
+        return data;
+    }
 
     public void addAdjacentVertex(Vertex<V> destination, double weight) {
         adjacentVertices.put(destination, weight);

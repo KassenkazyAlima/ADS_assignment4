@@ -18,7 +18,7 @@ public class Main {
 
         System.out.println("DFS:");
         Search<String> dfs = new DepthFirstSearch<>(graph, "Almaty");
-        outputPath(dfs, "Kyzylorda");
+        outputPath(dfs, "Kyzylordaa");
 
         System.out.println("--------------------------------");
 

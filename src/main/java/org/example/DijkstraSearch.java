@@ -19,7 +19,6 @@ public class DijkstraSearch<Vertex> extends Search<Vertex> {
             }
         }
 
-        // Priority queue to select the closest vertex
         pq = new PriorityQueue<>(Comparator.comparingDouble(distTo::get));
         pq.add(source);
 

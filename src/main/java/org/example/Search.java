@@ -13,7 +13,6 @@ public abstract class Search<Vertex> {
         edgeTo = new HashMap<>();
     }
 
-    // Abstract methods that subclasses must implement.
     abstract void search(Vertex startVertex);
 
     public boolean hasPathTo(Vertex v) {

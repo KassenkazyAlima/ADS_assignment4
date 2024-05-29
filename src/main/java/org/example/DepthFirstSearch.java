@@ -3,7 +3,6 @@ package org.example;
 import java.util.*;
 
 public class DepthFirstSearch<V> extends Search<V> {
-//    private Map<V, V> edgeTo = new HashMap<>();
     private Set<V> visited = new HashSet<>();
     private final WeightedGraph<V> graph;
 

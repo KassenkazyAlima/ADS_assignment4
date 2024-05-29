@@ -79,7 +79,7 @@ public class WeightedGraph<V> {
     public Iterable<Edge<V>> getEdges(V vertex) {
         List<Edge<V>> edges = map.get(vertex);
         if (edges == null) {
-            return Collections.emptyList();  // Always return an empty list instead of null
+            return Collections.emptyList();
         }
         return edges;
     }

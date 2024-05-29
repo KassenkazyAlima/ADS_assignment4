@@ -14,7 +14,7 @@ public class MyGraph<V> extends WeightedGraph<V> {
     @Override
     public void addVertex(V data) {
         if (!adjList.containsKey(data)) {
-            adjList.put(data, new ArrayList<>());  // Initialize the list for new vertices
+            adjList.put(data, new ArrayList<>());
         }
     }
 

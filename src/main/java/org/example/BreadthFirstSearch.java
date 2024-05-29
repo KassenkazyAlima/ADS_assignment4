@@ -9,7 +9,7 @@ public class BreadthFirstSearch<Vertex> extends Search<Vertex> {
     private final WeightedGraph<Vertex> graph;
 
     public BreadthFirstSearch(WeightedGraph<Vertex> graph, Vertex startVertex) {
-        super(startVertex); // Pass startVertex to the superclass constructor
+        super(startVertex);
         this.graph = graph;
         search(startVertex);
     }
