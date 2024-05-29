@@ -26,7 +26,7 @@ public class DepthFirstSearch<V> extends Search<V> {
 
     @Override
     public List<V> pathTo(V destination) {
-        List<Vertex> path = new ArrayList<>();
+        List<V> path = new ArrayList<>();
 
         if (!visited.contains(destination)) {
             return null;
