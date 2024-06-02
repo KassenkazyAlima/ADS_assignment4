@@ -53,7 +53,6 @@ public class WeightedGraph<V> {
         return count;
     }
 
-
     public boolean hasVertex(V v) {
         return map.containsKey(v);
     }
@@ -67,12 +66,10 @@ public class WeightedGraph<V> {
 
     public List<V> adjacencyList(V v) {
         if (!hasVertex(v)) return null;
-
         List<V> vertices = new LinkedList<>();
         for (Edge<V> e : map.get(v)) {
             vertices.add(e.getDest());
         }
-
         return vertices;
     }
 

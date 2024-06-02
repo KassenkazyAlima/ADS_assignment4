@@ -25,11 +25,12 @@ public class DepthFirstSearch<V> extends Search<V> {
 
     @Override
     public List<V> pathTo(V destination) {
-        List<V> path = new ArrayList<>();
+
 
         if (!visited.contains(destination)) {
-            return null;
+            return Collections.emptyList();
         }
+        List<V> path = new ArrayList<>();
         for (V x = destination; x != null; x = edgeTo.get(x)) {
             path.addFirst(x);
         }

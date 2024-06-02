@@ -35,9 +35,8 @@ public class BreadthFirstSearch<Vertex> extends Search<Vertex> {
 
     @Override
     public List<Vertex> pathTo(Vertex endVertex) {
+        if (!marked.contains(endVertex)) return Collections.emptyList();
         List<Vertex> path = new ArrayList<>();
-
-        if (!marked.contains(endVertex)) return null;
 
         for (Vertex x = endVertex; x != null; x = edgeTo.get(x)) {
             path.add(x);

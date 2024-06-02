@@ -22,12 +22,12 @@ public abstract class Search<Vertex> {
     public List<Vertex> pathTo(Vertex v) {
         if (!hasPathTo(v)) return null;
 
-        LinkedList<Vertex> ls = new LinkedList<>();
+        LinkedList<Vertex> linkedList = new LinkedList<>();
         for (Vertex i = v; i != source; i = edgeTo.get(i)) {
-            ls.push(i); // inverted adding
+            linkedList.push(i);
         }
-        ls.push(source);
+        linkedList.push(source);
 
-        return ls;
+        return linkedList;
     }
 }
